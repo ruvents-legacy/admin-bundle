@@ -18,6 +18,10 @@ class DeleteController extends AbstractController
      */
     public function __invoke(string $id, EntityConfig $entityConfig, Request $request): Response
     {
+        if (!$entityConfig->delete->enabled) {
+            return $this->redirectToList($entityConfig->name);
+        }
+
         $class = $entityConfig->class;
         $manager = $this->getEntityManager($class);
 
