@@ -71,6 +71,8 @@ class BuildEntitiesPass implements PassInterface
         $action->title = $data['title'];
         $action->requiresGranted = $data['requires_granted'];
         $action->fields = array_map([$this, 'buildListField'], $data['fields']);
+        $action->orderByAsc = $data['order_by_asc'];
+        $action->orderByDesc = $data['order_by_desc'];
 
         return $action;
     }

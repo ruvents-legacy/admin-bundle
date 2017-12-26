@@ -30,7 +30,7 @@ class ListController extends AbstractController
             ->createQueryBuilder()
             ->select($alias = 'entity')
             ->from($class, $alias)
-            ->orderBy('entity.'.$this->getIdField($class));
+            ->orderBy('entity.'.$this->sortBy($listConfig), $this->orderBy($listConfig));
 
         $paginator = PaginatorBuilder::create()
             ->setProvider(new DoctrineOrmProvider($qb))
