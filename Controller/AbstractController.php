@@ -67,15 +67,30 @@ abstract class AbstractController extends SymfonyAbstractController
         ]);
     }
 
-    protected function getIdField($class)
+    protected function sortBy($listConfig): string
     {
-        if (is_object($class)) {
-            $class = get_class($class);
+        if (null !== $listConfig->orderByAsc) {
+            return $listConfig->orderByAsc;
         }
 
-        return $this->getEntityManager($class)
-            ->getClassMetadata($class)
-            ->getSingleIdentifierFieldName();
+        if (null !== $listConfig->orderByDesc) {
+            return $listConfig->orderByDesc;
+        }
+
+        return 'id';
+    }
+
+    protected function orderBy($listConfig): ?string
+    {
+        if (null !== $listConfig->orderByAsc) {
+            return 'ASC';
+        }
+
+        if (null !== $listConfig->orderByDesc) {
+            return 'DESC';
+        }
+
+        return null;
     }
 
     protected function createCustomFormBuilder(string $type, $entity, array $options = []): FormBuilderInterface

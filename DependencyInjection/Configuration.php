@@ -129,6 +129,12 @@ class Configuration implements ConfigurationInterface
                     ->integerNode('per_page')
                         ->defaultValue(20)
                     ->end()
+                    ->scalarNode('order_by_asc')
+                        ->defaultNull()
+                    ->end()
+                    ->scalarNode('order_by_desc')
+                        ->defaultNull()
+                    ->end()
                     ->append($this->listFields())
                 ->end();
     }

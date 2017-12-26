@@ -12,6 +12,8 @@ use Ruwork\AdminBundle\Config\Model\Field\ListFieldConfig;
  * @property string[]          $requiresGranted
  * @property string            $title
  * @property ListFieldConfig[] $fields
+ * @property string            $orderByAsc
+ * @property string            $orderByDesc
  */
 class ListActionConfig extends AbstractConfig
 {
