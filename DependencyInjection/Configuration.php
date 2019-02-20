@@ -1,7 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
-namespace Ruwork\AdminBundle\DependencyInjection;
+namespace Ruvents\AdminBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
@@ -16,7 +17,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         return (new TreeBuilder())
-            ->root('ruwork_admin')
+            ->root('ruvents_admin')
                 ->addDefaultsIfNotSet()
                 ->children()
                     ->booleanNode('debug')
@@ -73,7 +74,7 @@ class Configuration implements ConfigurationInterface
                 ->children()
                     ->scalarNode('default_theme')
                         ->cannotBeEmpty()
-                        ->defaultValue('@RuworkAdmin/forms.html.twig')
+                        ->defaultValue('@RuventsAdmin/forms.html.twig')
                     ->end()
                     ->arrayNode('type_aliases')
                         ->scalarPrototype()
@@ -91,7 +92,7 @@ class Configuration implements ConfigurationInterface
                 ->children()
                     ->scalarNode('types_template')
                         ->cannotBeEmpty()
-                        ->defaultValue('@RuworkAdmin/list_field_types.html.twig')
+                        ->defaultValue('@RuventsAdmin/list_field_types.html.twig')
                     ->end()
                 ->end();
     }
@@ -157,7 +158,7 @@ class Configuration implements ConfigurationInterface
                     ->beforeNormalization()
                         ->ifString()
                         ->then(function ($value) {
-                            if (!preg_match('/^(?<property_path>[\[\]\.\w-]+)?(?>\@(?<type>[\w-\\\]+))?(?>\{(?<title>.*)\})?$/', $value, $matches)) {
+                            if (!preg_match('/^(?<property_path>[\[\]\.\w\-]+)?(?>\@(?<type>[\w\-\\\]+))?(?>\{(?<title>.*)\})?$/', $value, $matches)) {
                                 throw new \InvalidArgumentException(sprintf('"%s" is not a valid field definition.', $value));
                             }
 
@@ -235,7 +236,7 @@ class Configuration implements ConfigurationInterface
                         ->then(function ($value) {
                             static $groupI = 1;
 
-                            if (!preg_match('/^(?<property_path>[\[\]\.\w-]+)?(?>\@(?<type>[\w-\\\]+))?(?<attr_class>(?>\.[\w-]+)+)?(?>\{(?<label>.*)\})?$/', $value, $matches)) {
+                            if (!preg_match('/^(?<property_path>[\[\]\.\w-]+)?(?>\@(?<type>[\w\-\\\]+))?(?<attr_class>(?>\.[\w\-]+)+)?(?>\{(?<label>.*)\})?$/', $value, $matches)) {
                                 throw new \InvalidArgumentException(sprintf('"%s" is not a valid field definition.', $value));
                             }
 
